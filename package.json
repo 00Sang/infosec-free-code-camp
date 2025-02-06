@@ -2,9 +2,9 @@
 	"name": "fcc-infosec-challenges",
 	"version": "0.0.1",
 	"description": "fcc backend boilerplate",
-	"main": "myapp.js",
+	"main": "server.js",
 	"scripts": {
-		"start": "node myApp.js"
+		"start": "node server.js"
 	},
 	"dependencies": {
 		"express": "^4.14.0",
