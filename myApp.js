@@ -1,12 +1,14 @@
 const express = require('express');
 const helmet = require('helmet');
-const api = require("./server.js")
+const api = require("./server.js");
+require('dotenv').config();
 const app = express();
 
+app.use(helmet.hidePoweredBy());
 
-
-
-
+app.use(helmet.frameguard({
+  XframeOption: { action : "deny"},
+}),);
 
 
 
