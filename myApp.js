@@ -1,14 +1,7 @@
 const express = require('express');
 const helmet = require('helmet');
-const api = require("./server.js");
-require('dotenv').config();
 const app = express();
 
-app.use(helmet.hidePoweredBy());
-
-app.use(helmet.frameguard({
-  XframeOption: { action : "deny"},
-}),);
 
 
 
@@ -50,6 +43,9 @@ app.use(helmet.frameguard({
 
 
 
+
+module.exports = app;
+const api = require('./server.js');
 app.use(express.static('public'));
 app.disable('strict-transport-security');
 app.use('/_api', api);
@@ -60,4 +56,4 @@ let port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Your app is listening on port ${port}`);
 });
-module.exports = app;
+
