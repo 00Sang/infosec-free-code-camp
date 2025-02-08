@@ -13,13 +13,15 @@ app.use(helmet.ieNoOpen());
 app.use(helmet.hsts({maxAge: 20 * 24 * 60 * 60, force: true }))
 app.use(helmet.dnsPrefetchControl());
 app.use(helmet.noCache());
-app.use(helmet.contentSecurityPolicy({
-  directive: {
-    defaultSrc: ["'self'"],
-    scriptSrc: ["'self'", "trusted-cdn.com"],
-    }, 
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"], // Allow content only from your own site
+      scriptSrc: ["'self'", "trusted-cdn.com"], // Allow scripts from your site and a trusted CDN
+    },
   })
 );
+
 
 app.get("/", (req, res) => {
     res.send("Helmet Frameguard is working!");
