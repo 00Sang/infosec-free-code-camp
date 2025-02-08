@@ -9,7 +9,7 @@ app.use(helmet.hidePoweredBy());
 app.use(helmet({ frameguard: { action: 'deny'},})); // Ensure it's explicitly set
 app.use(helmet.xssFilter());
 app.use(helmet.noSniff());
-app.use(helmet.ieNoOpen());
+app.use(helmet. ieNoOpen());
 app.use(helmet.hsts({maxAge: 20 * 24 * 60 * 60, force: true }))
 app.use(helmet.dnsPrefetchControl());
 app.use(helmet.noCache());
