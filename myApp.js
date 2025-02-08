@@ -1,11 +1,25 @@
 const express = require("express");
 const helmet = require("helmet");
-
+const bcrypt =require("bcrypt");
+ 
 const app = express();
 
 // Apply Helmet as the first middleware
-app.use(helmet());
-app.use(helmet.frameguard({ action: "deny" })); // Ensure it's explicitly set
+app.use(helmet.hidePoweredBy());
+app.use(helmet({ frameguard: { action: 'deny'},})); // Ensure it's explicitly set
+app.use(helmet.xssFilter());
+app.use(helmet.noSniff());
+app.use(helmet.ieNoOpen());
+app.use(helmet.hsts({maxAge: 20 * 24 * 60 * 60, force: true }))
+app.use(helmet.dnsPrefetchControl());
+app.use(helmet.noCache());
+app.use(helmet.contentSecurityPolicy({
+  directive: {
+    defaultSrc: ["'self'"],
+    scriptSrc: ["'self'", "trusted-cdn.com"],
+    }, 
+  })
+);
 
 app.get("/", (req, res) => {
     res.send("Helmet Frameguard is working!");
