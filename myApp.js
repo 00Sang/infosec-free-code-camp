@@ -1,10 +1,15 @@
-const helmet = require('helmet');
-const express = require('express');
+const express = require("express");
+const helmet = require("helmet");
+
 const app = express();
 
-//app.use(helmet.hidePoweredBy());
-app.use(helmet.frameguard({ action: "deny" }));
+// Apply Helmet as the first middleware
+app.use(helmet());
+app.use(helmet.frameguard({ action: "deny" })); // Ensure it's explicitly set
 
+app.get("/", (req, res) => {
+    res.send("Helmet Frameguard is working!");
+});
 
 
 
